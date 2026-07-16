@@ -1,0 +1,52 @@
+{
+  "name": "transcriptfetch-mcp",
+  "version": "0.1.0",
+  "description": "Model Context Protocol (MCP) server for TranscriptFetch: fetch YouTube transcripts, search, channels, and playlists from any MCP client.",
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "youtube",
+    "transcript",
+    "captions",
+    "claude",
+    "ai",
+    "llm"
+  ],
+  "license": "MIT",
+  "author": "TranscriptFetch <support@transcriptfetch.com>",
+  "homepage": "https://transcriptfetch.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TranscriptFetch/mcp-server.git"
+  },
+  "bugs": {
+    "url": "https://github.com/TranscriptFetch/mcp-server/issues"
+  },
+  "type": "module",
+  "bin": {
+    "transcriptfetch-mcp": "./dist/index.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "tsup",
+    "typecheck": "tsc --noEmit",
+    "start": "node dist/index.js",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.4.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.30",
+    "tsup": "^8.0.2",
+    "typescript": "^5.4.5"
+  }
+}
