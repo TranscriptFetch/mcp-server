@@ -16,13 +16,19 @@ export const TOOLS = [
   {
     name: "get_transcript",
     description:
-      "Fetch the full transcript for a single YouTube video. Accepts a video ID or any YouTube URL.",
+      "Fetch the full transcript for a video. Accepts a YouTube video ID or URL, plus TikTok, Instagram, X (Twitter), and Facebook video URLs and direct media file URLs. If no transcript comes back, the result says whether captions definitively do not exist (aiFallback.captionsUnavailable) and whether transcribing the audio would still work (aiFallback.available). When it does, call this tool again with ai_fallback: true.",
     inputSchema: {
       type: "object",
       properties: {
         video: {
           type: "string",
-          description: "YouTube video ID or URL (e.g. dQw4w9WgXcQ or https://youtu.be/...).",
+          description:
+            "Video ID or URL, YouTube (dQw4w9WgXcQ, youtu.be/...), TikTok, Instagram, X, Facebook, or a direct media file URL.",
+        },
+        ai_fallback: {
+          type: "boolean",
+          description:
+            "Skip captions and transcribe the audio with AI instead. Use this only after a previous call reported aiFallback.available, it starts an async job (1 credit on delivery) that takes 1-3 minutes.",
         },
       },
       required: ["video"],
@@ -87,7 +93,10 @@ type Args = Record<string, unknown>;
 const ROUTES: Record<string, { path: string; body: (a: Args) => Record<string, unknown> }> = {
   get_transcript: {
     path: "/api/v1/transcripts/video",
-    body: (a) => ({ video: a.video }),
+    body: (a) => ({
+      video: a.video,
+      ...(a.ai_fallback != null ? { ai_fallback: a.ai_fallback } : {}),
+    }),
   },
   search_videos: {
     path: "/api/v1/transcripts/search",
