@@ -22,18 +22,29 @@ Each successful fetch costs 1 credit. Get a key at [the dashboard](https://trans
 
 ## Install
 
-The package is not on npm yet, so run it from source:
+No install needed. Run it on demand with `npx`:
+
+```bash
+TRANSCRIPTFETCH_API_KEY=tf_live_... npx -y transcriptfetch-mcp
+```
+
+Or install globally:
+
+```bash
+npm install -g transcriptfetch-mcp
+```
+
+Requires Node 18+.
+
+### Run from source
 
 ```bash
 git clone https://github.com/TranscriptFetch/mcp-server
 cd mcp-server && npm install && npm run build
 ```
 
-That produces `dist/index.js`, which is what your client launches (see the
-config below). Requires Node 18+.
-
-Once published, `npx -y transcriptfetch-mcp` will work without the clone and the
-client config can switch to `"command": "npx"`.
+Then point your client at the built entrypoint with `"command": "node"` and
+`"args": ["/absolute/path/to/mcp-server/dist/index.js"]`.
 
 ## Client configuration
 
@@ -45,8 +56,8 @@ Add this to `claude_desktop_config.json` (Settings then Developer then Edit Conf
 {
   "mcpServers": {
     "transcriptfetch": {
-      "command": "node",
-      "args": ["/absolute/path/to/mcp-server/dist/index.js"],
+      "command": "npx",
+      "args": ["-y", "transcriptfetch-mcp"],
       "env": { "TRANSCRIPTFETCH_API_KEY": "tf_live_..." }
     }
   }
