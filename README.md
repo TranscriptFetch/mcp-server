@@ -16,6 +16,7 @@ Runs locally over stdio and calls the TranscriptFetch API with your key. Prefer 
 | `search_videos` | Search YouTube by keyword |
 | `list_channel_videos` | List a channel's videos (handle, ID, or URL) |
 | `list_playlist_videos` | List a playlist's videos (ID or URL) |
+| `get_credits` | Remaining credit balance for the key. Never billed |
 
 Each successful fetch costs 1 credit. Get a key (100 free credits) at [the dashboard](https://transcriptfetch.com/app).
 
@@ -99,3 +100,14 @@ The assistant picks the matching tool and works from the returned transcript or 
 ## License
 
 MIT
+
+## Docker
+
+The server speaks MCP over stdio, so there is no port to expose. `-i` is
+required: without an attached stdin the transport closes immediately and the
+container looks like it crashed.
+
+```bash
+docker build -t transcriptfetch-mcp .
+docker run --rm -i -e TRANSCRIPTFETCH_API_KEY=tf_live_... transcriptfetch-mcp
+```

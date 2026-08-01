@@ -7,6 +7,7 @@ const ENV_API_KEY = "TRANSCRIPTFETCH_API_KEY";
 
 export interface ApiClient {
   post(path: string, body: Record<string, unknown>): Promise<unknown>;
+  get(path: string): Promise<unknown>;
 }
 
 /** Resolve the API key from env and return a client bound to it. */
@@ -19,17 +20,15 @@ export function createClient(): ApiClient {
   }
   const baseUrl = (process.env.TRANSCRIPTFETCH_BASE_URL ?? DEFAULT_BASE_URL).replace(/\/+$/, "");
 
-  return {
-    async post(path, body) {
+  async function request(path: string, init: RequestInit): Promise<unknown> {
       const res = await fetch(baseUrl + path, {
-        method: "POST",
+        ...init,
         headers: {
           Authorization: `Bearer ${apiKey}`,
           "Content-Type": "application/json",
           Accept: "application/json",
           "User-Agent": `transcriptfetch-mcp/${VERSION}`,
         },
-        body: JSON.stringify(body),
       });
 
       const text = await res.text();
@@ -50,6 +49,10 @@ export function createClient(): ApiClient {
       // The API wraps successes as { ok, request_id, data, usage }.
       const envelope = payload as { data?: unknown } | null;
       return envelope?.data ?? payload;
-    },
+  }
+
+  return {
+    post: (path, body) => request(path, { method: "POST", body: JSON.stringify(body) }),
+    get: (path) => request(path, { method: "GET" }),
   };
 }

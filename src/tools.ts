@@ -69,6 +69,16 @@ export const TOOLS = [
       additionalProperties: false,
     },
   },
+  {
+    name: "get_credits",
+    description:
+      "Check the remaining TranscriptFetch credit balance for the current API key. Free: this call is never billed.",
+    inputSchema: {
+      type: "object",
+      properties: {},
+      additionalProperties: false,
+    },
+  },
 ] as const;
 
 type Args = Record<string, unknown>;
@@ -95,6 +105,16 @@ const ROUTES: Record<string, { path: string; body: (a: Args) => Record<string, u
 
 /** Run a tool by name and return its result as JSON text. */
 export async function callTool(client: ApiClient, name: string, args: Args): Promise<string> {
+  // get_credits is a GET against /api/v1/me and takes no arguments, so it sits
+  // outside the POST-with-a-body ROUTES table rather than being bent to fit it.
+  // The response is passed through unchanged, like every other tool: the API
+  // returns { kind, user_id, credits } and reshaping it here would make this the
+  // only tool whose output does not match the documented v1 envelope.
+  if (name === "get_credits") {
+    const data = await client.get("/api/v1/me");
+    return JSON.stringify(data, null, 2);
+  }
+
   const route = ROUTES[name];
   if (!route) throw new Error(`Unknown tool: ${name}`);
   const data = await client.post(route.path, route.body(args ?? {}));
