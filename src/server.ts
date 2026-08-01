@@ -6,11 +6,20 @@ import { createClient } from "./client.js";
 import { callTool, TOOLS } from "./tools.js";
 import { VERSION } from "./version.js";
 
+// Server-level guidance sent on initialize. Kept in step with the tool
+// descriptions in tools.ts: it is the first thing a client reads, and stating
+// YouTube-only here would undercut the multi-platform support get_transcript
+// actually has.
 const INSTRUCTIONS =
-  "Fetch YouTube transcripts and discover videos. Use get_transcript for a single " +
-  "video's full text, search_videos to find videos by keyword, and " +
-  "list_channel_videos / list_playlist_videos to enumerate a channel or playlist. " +
-  "Each successful fetch costs 1 credit.";
+  "Turn videos into text. get_transcript fetches the full transcript for a " +
+  "YouTube, TikTok, Instagram, X (Twitter) or Facebook video, or a direct media " +
+  "file URL. Most short-form video has no caption track; when that happens the " +
+  "result reports whether captions definitively do not exist and whether " +
+  "transcribing the audio would still work, in which case call get_transcript " +
+  "again with ai_fallback: true. search_videos, list_channel_videos and " +
+  "list_playlist_videos discover videos on YouTube. get_credits reports the " +
+  "remaining balance and is never billed. Each successful fetch costs 1 credit; " +
+  "failed, blocked and empty results are free.";
 
 export function buildServer(): Server {
   const server = new Server(

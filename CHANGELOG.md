@@ -3,6 +3,12 @@
 All notable changes to this project are documented here. This project follows
 [Semantic Versioning](https://semver.org/).
 
+## [0.2.2]
+
+- Server instructions now match the tool definitions. The text sent on
+  initialize still described the server as YouTube-only and did not mention
+  `ai_fallback` or `get_credits`, which is the first thing an MCP client reads.
+
 ## [0.2.1]
 
 - `get_transcript` now documents the platforms it has always accepted: TikTok,
