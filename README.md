@@ -4,7 +4,7 @@
 
 # TranscriptFetch MCP Server
 
-A [Model Context Protocol](https://modelcontextprotocol.io) server that gives any MCP client (Claude Desktop, Cursor, and others) access to the [TranscriptFetch API](https://transcriptfetch.com): fetch YouTube transcripts, search videos, and enumerate channels and playlists.
+A [Model Context Protocol](https://modelcontextprotocol.io) server that gives any MCP client (Claude Desktop, Cursor, and others) access to the [TranscriptFetch API](https://transcriptfetch.com): fetch YouTube transcripts, search videos, enumerate channels and playlists, and check your credit balance.
 
 Runs locally over stdio and calls the TranscriptFetch API with your key. Prefer a hosted, remote server? Point your client at `https://transcriptfetch.com/mcp` instead (OAuth or API key).
 
@@ -18,34 +18,22 @@ Runs locally over stdio and calls the TranscriptFetch API with your key. Prefer 
 | `list_playlist_videos` | List a playlist's videos (ID or URL) |
 | `get_credits` | Remaining credit balance for the key. Never billed |
 
-Each successful fetch costs 1 credit. Get a key (100 free credits) at [the dashboard](https://transcriptfetch.com/app).
+Each successful fetch costs 1 credit. Get a key at [the dashboard](https://transcriptfetch.com/app). Accounts start with 100 free credits and are topped back up to 100 at the start of each month.
 
 ## Install
 
-No install needed. Run it on demand with `npx`:
-
-```bash
-TRANSCRIPTFETCH_API_KEY=tf_live_... npx transcriptfetch-mcp
-```
-
-Or install globally:
-
-```bash
-npm install -g transcriptfetch-mcp
-```
-
-Requires Node 18+.
-
-### Run from source
-
-Until the package is on npm, you can run it straight from the repo:
+The package is not on npm yet, so run it from source:
 
 ```bash
 git clone https://github.com/TranscriptFetch/mcp-server
 cd mcp-server && npm install && npm run build
 ```
 
-Then set your client's `command` to `node` with the built entrypoint (see the config below, using `"command": "node"` and `"args": ["/absolute/path/to/mcp-server/dist/index.js"]`).
+That produces `dist/index.js`, which is what your client launches (see the
+config below). Requires Node 18+.
+
+Once published, `npx -y transcriptfetch-mcp` will work without the clone and the
+client config can switch to `"command": "npx"`.
 
 ## Client configuration
 
@@ -57,8 +45,8 @@ Add this to `claude_desktop_config.json` (Settings then Developer then Edit Conf
 {
   "mcpServers": {
     "transcriptfetch": {
-      "command": "npx",
-      "args": ["-y", "transcriptfetch-mcp"],
+      "command": "node",
+      "args": ["/absolute/path/to/mcp-server/dist/index.js"],
       "env": { "TRANSCRIPTFETCH_API_KEY": "tf_live_..." }
     }
   }
@@ -69,7 +57,7 @@ Add this to `claude_desktop_config.json` (Settings then Developer then Edit Conf
 
 Add the same block under `mcpServers` in your Cursor MCP settings.
 
-Restart the client, and the four tools appear.
+Restart the client, and the five tools appear.
 
 ## Example
 
@@ -81,6 +69,8 @@ Once connected, ask your assistant naturally:
 
 > List the latest videos from @lexfridman and pull the transcript of the newest one.
 
+> How many TranscriptFetch credits do I have left?
+
 The assistant picks the matching tool and works from the returned transcript or video list.
 
 ## Configuration
@@ -89,17 +79,6 @@ The assistant picks the matching tool and works from the returned transcript or 
 |---|---|---|
 | `TRANSCRIPTFETCH_API_KEY` | yes | none |
 | `TRANSCRIPTFETCH_BASE_URL` | no | `https://transcriptfetch.com` |
-
-## Links
-
-- API docs: https://transcriptfetch.com/docs
-- MCP docs: https://transcriptfetch.com/docs/mcp
-- Node SDK: https://github.com/TranscriptFetch/node-sdk
-- Python SDK: https://github.com/TranscriptFetch/python-sdk
-
-## License
-
-MIT
 
 ## Docker
 
@@ -111,3 +90,14 @@ container looks like it crashed.
 docker build -t transcriptfetch-mcp .
 docker run --rm -i -e TRANSCRIPTFETCH_API_KEY=tf_live_... transcriptfetch-mcp
 ```
+
+## Links
+
+- API docs: https://transcriptfetch.com/docs
+- MCP docs: https://transcriptfetch.com/docs/mcp
+- Node SDK: https://github.com/TranscriptFetch/node-sdk
+- Python SDK: https://github.com/TranscriptFetch/python-sdk
+
+## License
+
+MIT
