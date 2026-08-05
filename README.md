@@ -4,7 +4,7 @@
 
 # TranscriptFetch MCP Server
 
-A [Model Context Protocol](https://modelcontextprotocol.io) server that gives any MCP client (Claude Desktop, Cursor, and others) access to the [TranscriptFetch API](https://transcriptfetch.com): fetch transcripts from YouTube, TikTok, Instagram, X and Facebook, search videos, enumerate channels and playlists, and check your credit balance.
+A [Model Context Protocol](https://modelcontextprotocol.io) server that gives any MCP client (Claude Desktop, Cursor, and others) access to the [TranscriptFetch API](https://transcriptfetch.com): fetch transcripts from YouTube, TikTok, Instagram and direct media file URLs, search videos, enumerate channels and playlists, and check your credit balance.
 
 Runs locally over stdio and calls the TranscriptFetch API with your key. Prefer a hosted, remote server? Point your client at `https://transcriptfetch.com/mcp` instead (OAuth or API key).
 
@@ -12,7 +12,7 @@ Runs locally over stdio and calls the TranscriptFetch API with your key. Prefer 
 
 | Tool | What it does |
 |---|---|
-| `get_transcript` | Transcript for a video. YouTube, TikTok, Instagram, X, Facebook, or a direct media URL. Set `ai_fallback: true` to transcribe the audio when no captions exist |
+| `get_transcript` | Transcript for a video. YouTube, TikTok, Instagram, or a direct media URL. Set `ai_fallback: true` to transcribe the audio when no captions exist |
 | `search_videos` | Search YouTube by keyword (YouTube only) |
 | `list_channel_videos` | List a channel's videos (handle, ID, or URL) |
 | `list_playlist_videos` | List a playlist's videos (ID or URL) |

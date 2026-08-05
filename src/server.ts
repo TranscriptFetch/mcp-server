@@ -7,12 +7,13 @@ import { callTool, TOOLS } from "./tools.js";
 import { VERSION } from "./version.js";
 
 // Server-level guidance sent on initialize. Kept in step with the tool
-// descriptions in tools.ts: it is the first thing a client reads, and stating
-// YouTube-only here would undercut the multi-platform support get_transcript
-// actually has.
+// descriptions in tools.ts: it is the first thing a client reads, so the
+// platform list has to be exactly the set the API accepts. Listing one the API
+// rejects costs the model a whole failed call before it can learn otherwise,
+// and it may have picked this server over a working one to make it.
 const INSTRUCTIONS =
   "Turn videos into text. get_transcript fetches the full transcript for a " +
-  "YouTube, TikTok, Instagram, X (Twitter) or Facebook video, or a direct media " +
+  "YouTube, TikTok or Instagram video, or a direct media " +
   "file URL. Most short-form video has no caption track; when that happens the " +
   "result reports whether captions definitively do not exist and whether " +
   "transcribing the audio would still work, in which case call get_transcript " +

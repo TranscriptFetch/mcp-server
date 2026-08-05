@@ -3,6 +3,20 @@
 All notable changes to this project are documented here. This project follows
 [Semantic Versioning](https://semver.org/).
 
+## [0.2.3]
+
+- **Fixed: the server advertised two platforms it cannot fetch.** The
+  `get_transcript` description, its `video` argument description, the server
+  instructions sent on initialize, the README and the npm package description
+  all claimed support for X (Twitter) and Facebook. Neither has ever worked:
+  the API rejects those URLs. An agent reading the tool would pick this server
+  for an X or Facebook link and burn a call on a guaranteed error, so the claim
+  was worse than an omission. The 0.2.1 entry below, which introduced the
+  wording, is wrong for the same reason and is left in place only as the record
+  of what shipped.
+- The supported set is now stated exactly as it is: YouTube, TikTok, Instagram
+  and direct media file URLs.
+
 ## [0.2.2]
 
 - Server instructions now match the tool definitions. The text sent on

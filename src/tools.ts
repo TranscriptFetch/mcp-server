@@ -16,14 +16,14 @@ export const TOOLS = [
   {
     name: "get_transcript",
     description:
-      "Fetch the full transcript for a video. Accepts a YouTube video ID or URL, plus TikTok, Instagram, X (Twitter), and Facebook video URLs and direct media file URLs. If no transcript comes back, the result says whether captions definitively do not exist (aiFallback.captionsUnavailable) and whether transcribing the audio would still work (aiFallback.available). When it does, call this tool again with ai_fallback: true.",
+      "Fetch the full transcript for a video. Accepts a YouTube video ID or URL, plus TikTok and Instagram video URLs and direct media file URLs. If no transcript comes back, the result says whether captions definitively do not exist (aiFallback.captionsUnavailable) and whether transcribing the audio would still work (aiFallback.available). When it does, call this tool again with ai_fallback: true.",
     inputSchema: {
       type: "object",
       properties: {
         video: {
           type: "string",
           description:
-            "Video ID or URL, YouTube (dQw4w9WgXcQ, youtu.be/...), TikTok, Instagram, X, Facebook, or a direct media file URL.",
+            "Video ID or URL, YouTube (dQw4w9WgXcQ, youtu.be/...), TikTok, Instagram, or a direct media file URL.",
         },
         ai_fallback: {
           type: "boolean",

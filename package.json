@@ -1,11 +1,13 @@
 {
   "name": "transcriptfetch-mcp",
-  "version": "0.2.2",
-  "description": "Model Context Protocol (MCP) server for TranscriptFetch: fetch YouTube transcripts, search, channels, and playlists from any MCP client.",
+  "version": "0.2.3",
+  "description": "Model Context Protocol (MCP) server for TranscriptFetch: fetch transcripts from YouTube, TikTok, Instagram and direct media URLs, plus search, channels, and playlists, from any MCP client.",
   "keywords": [
     "mcp",
     "model-context-protocol",
     "youtube",
+    "tiktok",
+    "instagram",
     "transcript",
     "captions",
     "claude",
