@@ -1,0 +1,35 @@
+name: Release
+
+# Publishes to npm on a version tag (e.g. v0.2.4) using npm Trusted Publishing
+# (OIDC): no tokens stored, and npm attaches a provenance statement
+# automatically. Configure the trusted publisher on npmjs.com first
+# (package settings -> Trusted Publisher -> GitHub Actions, repo
+# TranscriptFetch/mcp-server, workflow release.yml):
+# https://docs.npmjs.com/trusted-publishers
+#
+# Mirrors node-sdk's release.yml so every package ships the same way: push the
+# version bump, tag it v<version>, push the tag. (Added 2026-08-28; before
+# this, releases were manual `npm publish` gated on the owner's 2FA OTP.)
+
+on:
+  push:
+    tags: ["v*"]
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write # required for trusted publishing / provenance
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          registry-url: "https://registry.npmjs.org"
+      # Trusted publishing needs npm 11.5.1+; the runner's bundled npm may lag.
+      - run: npm install -g npm@latest
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run build
+      - run: npm publish
