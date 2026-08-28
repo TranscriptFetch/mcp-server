@@ -1,22 +1,28 @@
 {
   "name": "transcriptfetch-mcp",
-  "version": "0.2.4",
-  "description": "Model Context Protocol (MCP) server for TranscriptFetch: fetch transcripts from YouTube, TikTok, Instagram and direct media URLs, plus search, channels, and playlists, from any MCP client.",
+  "version": "0.2.5",
+  "description": "Model Context Protocol (MCP) server for TranscriptFetch: give Claude, Cursor, or any MCP client video and audio transcripts - YouTube, TikTok, Instagram, podcasts and media URLs, with automatic AI transcription when captions don't exist - plus video search, channel and playlist listing.",
   "keywords": [
     "mcp",
+    "mcp-server",
     "model-context-protocol",
+    "claude",
+    "cursor",
     "youtube",
+    "youtube-transcript",
     "tiktok",
     "instagram",
     "transcript",
+    "transcription",
     "captions",
-    "claude",
+    "speech-to-text",
     "ai",
-    "llm"
+    "llm",
+    "ai-agents"
   ],
   "license": "MIT",
   "author": "TranscriptFetch <support@transcriptfetch.com>",
-  "homepage": "https://transcriptfetch.com",
+  "homepage": "https://transcriptfetch.com/mcp-server",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/TranscriptFetch/mcp-server.git"

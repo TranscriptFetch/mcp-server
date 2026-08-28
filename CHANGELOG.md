@@ -3,6 +3,12 @@
 All notable changes to this project are documented here. This project follows
 [Semantic Versioning](https://semver.org/).
 
+## [0.2.5] - 2026-08-28
+
+### Changed
+
+- npm listing refresh: description names the clients and the AI-transcription fallback, richer keywords, homepage points at /mcp-server. No code changes.
+
 ## [0.2.4]
 
 - **Fixed: stale `ai_fallback` timing claim.** The argument description said AI
