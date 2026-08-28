@@ -3,6 +3,17 @@
 All notable changes to this project are documented here. This project follows
 [Semantic Versioning](https://semver.org/).
 
+## [0.2.4]
+
+- **Fixed: stale `ai_fallback` timing claim.** The argument description said AI
+  transcription "starts an async job ... that takes 1-3 minutes". After
+  pipeline optimizations it typically completes in ~30 seconds for short
+  videos (longer videos take longer), and short media is returned inline
+  rather than as a job to poll. The description now says so.
+- README: the `get_transcript` row notes the typical AI-transcription time, and
+  the hosted-server line notes that the hosted MCP waits inline for short-form
+  AI transcription, so no polling is needed there.
+
 ## [0.2.3]
 
 - **Fixed: the server advertised two platforms it cannot fetch.** The

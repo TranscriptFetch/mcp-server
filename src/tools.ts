@@ -28,7 +28,7 @@ export const TOOLS = [
         ai_fallback: {
           type: "boolean",
           description:
-            "Skip captions and transcribe the audio with AI instead. Use this only after a previous call reported aiFallback.available, it starts an async job (1 credit on delivery) that takes 1-3 minutes.",
+            "Skip captions and transcribe the audio with AI instead. Use this only after a previous call reported aiFallback.available. Charged 1 credit on delivery; typically ~30 seconds for short videos, longer for long ones.",
         },
       },
       required: ["video"],
