@@ -3,6 +3,12 @@
 All notable changes to this project are documented here. This project follows
 [Semantic Versioning](https://semver.org/).
 
+## [0.2.6] - 2026-09-10
+
+### Changed
+
+- Listing refresh for the brand: a production transcript API for YouTube, TikTok and Instagram. Podcast inputs (Spotify, Apple Podcasts, RSS) were retired by the API on 2026-09-10 and now answer `unsupported_platform`; the tool descriptions come from the hosted server, so no code changes here.
+
 ## [0.2.5] - 2026-08-28
 
 ### Changed
