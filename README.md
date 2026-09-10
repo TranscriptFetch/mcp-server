@@ -4,7 +4,15 @@
 
 # TranscriptFetch MCP Server
 
-A [Model Context Protocol](https://modelcontextprotocol.io) server that gives any MCP client (Claude Desktop, Cursor, and others) access to the [TranscriptFetch API](https://transcriptfetch.com): fetch transcripts from YouTube, TikTok, Instagram and direct media file URLs, search videos, enumerate channels and playlists, and check your credit balance.
+A [Model Context Protocol](https://modelcontextprotocol.io) server that gives any MCP client (Claude Desktop, Cursor, and others) access to the [TranscriptFetch API](https://transcriptfetch.com): a production transcript API for YouTube, TikTok and Instagram, with AI transcription when captions are missing. Fetch transcripts, search videos, list channels and playlists, and check your credit balance.
+
+## Get an API key
+
+1. Create a free account at [transcriptfetch.com](https://transcriptfetch.com/sign-up). No card needed.
+2. Open [Dashboard, then API keys](https://transcriptfetch.com/app/keys) and create a key. It starts with `tf_live_`.
+3. Put it in `TRANSCRIPTFETCH_API_KEY` in the client configuration below.
+
+Every account gets 100 free credits a month. Failures are free: a fetch that returns no transcript is never charged.
 
 Runs locally over stdio and calls the TranscriptFetch API with your key. Prefer a hosted, remote server? Point your client at `https://transcriptfetch.com/mcp` instead (OAuth or API key). The hosted server waits inline for short-form AI transcription, so no polling is needed there.
 
@@ -13,12 +21,12 @@ Runs locally over stdio and calls the TranscriptFetch API with your key. Prefer 
 | Tool | What it does |
 |---|---|
 | `get_transcript` | Transcript for a video. YouTube, TikTok, Instagram, or a direct media URL. Set `ai_fallback: true` to transcribe the audio when no captions exist (typically ~30 seconds for short videos, longer for long ones) |
-| `search_videos` | Search YouTube by keyword (YouTube only) |
-| `list_channel_videos` | List a channel's videos (handle, ID, or URL) |
-| `list_playlist_videos` | List a playlist's videos (ID or URL) |
+| `search_videos` | Search YouTube by keyword |
+| `list_channel_videos` | List a YouTube channel's videos (handle, ID, or URL) |
+| `list_playlist_videos` | List a YouTube playlist's videos (ID or URL) |
 | `get_credits` | Remaining credit balance for the key. Never billed |
 
-Each successful fetch costs 1 credit. Failed, blocked and empty results are never charged, which matters on short-form video where many clips have no speech at all. Get a key at [the dashboard](https://transcriptfetch.com/app). Accounts start with 100 free credits and are topped back up to 100 at the start of each month.
+Pricing is per successful result: a caption fetch or a video list costs 1 credit, and AI transcription of the audio costs 1 credit per started minute of audio, charged only on delivery. Failed, blocked and empty results are never charged, which matters on short-form video where many clips have no speech at all.
 
 ## Install
 
