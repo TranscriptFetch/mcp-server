@@ -12,7 +12,7 @@ A [Model Context Protocol](https://modelcontextprotocol.io) server that gives an
 2. Open [Dashboard, then API keys](https://transcriptfetch.com/app/keys) and create a key. It starts with `tf_live_`.
 3. Put it in `TRANSCRIPTFETCH_API_KEY` in the client configuration below.
 
-Every account gets 100 free credits a month. Failures are free: a fetch that returns no transcript is never charged.
+Every account gets 50 free credits a month. Failures are free: a fetch that returns no transcript is never charged.
 
 Runs locally over stdio and calls the TranscriptFetch API with your key. Prefer a hosted, remote server? Point your client at `https://transcriptfetch.com/mcp` instead (OAuth or API key). The hosted server waits inline for short-form AI transcription, so no polling is needed there.
 
