@@ -114,8 +114,8 @@ docker run --rm -i -e TRANSCRIPTFETCH_API_KEY=tf_live_... transcriptfetch-mcp
 
 - API docs: https://transcriptfetch.com/docs
 - MCP docs: https://transcriptfetch.com/docs/mcp
-- Node SDK: https://github.com/TranscriptFetch/node-sdk
-- Python SDK: https://github.com/TranscriptFetch/python-sdk
+- Node SDK: https://github.com/TranscriptFetch/transcript-api-node
+- Python SDK: https://github.com/TranscriptFetch/transcript-api-python
 
 ## License
 

@@ -7,7 +7,7 @@ name: Release
 # TranscriptFetch/mcp-server, workflow release.yml):
 # https://docs.npmjs.com/trusted-publishers
 #
-# Mirrors node-sdk's release.yml so every package ships the same way: push the
+# Mirrors transcript-api-node's release.yml so every package ships the same way: push the
 # version bump, tag it v<version>, push the tag. (Added 2026-08-28; before
 # this, releases were manual `npm publish` gated on the owner's 2FA OTP.)
 
