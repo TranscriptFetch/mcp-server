@@ -26,7 +26,7 @@ Runs locally over stdio and calls the TranscriptFetch API with your key. Prefer 
 | `list_playlist_videos` | List a YouTube playlist's videos (ID or URL) |
 | `get_credits` | Remaining credit balance for the key. Never billed |
 
-Pricing is per successful result: a caption fetch or a video list costs 1 credit, and AI transcription of the audio costs 1 credit per started minute of audio, charged only on delivery. Failed, blocked and empty results are never charged, which matters on short-form video where many clips have no speech at all.
+Pricing is per successful result: a caption fetch or a video list costs 1 credit, and AI transcription of the audio costs 1 credit per started 5 minutes of audio, charged only on delivery. Failed, blocked and empty results are never charged, which matters on short-form video where many clips have no speech at all.
 
 ## Install
 

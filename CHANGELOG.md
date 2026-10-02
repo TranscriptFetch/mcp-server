@@ -3,6 +3,23 @@
 All notable changes to this project are documented here. This project follows
 [Semantic Versioning](https://semver.org/).
 
+## [0.2.8] - 2026-10-02
+
+### Fixed
+
+- AI transcription price in the `ai_fallback` description and the README: 1 credit
+  per started 5 minutes of audio (the API's rate since 2026-09-23), not per
+  started minute.
+- The version the server reports to MCP clients and in its User-Agent was still
+  0.2.6; it now matches the package.
+
+## [0.2.7] - 2026-09-10
+
+### Changed
+
+- README leads with getting an API key; the `ai_fallback` description states the
+  per-minute audio price of the time.
+
 ## [0.2.6] - 2026-09-10
 
 ### Changed
